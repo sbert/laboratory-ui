@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServerService} from '../../service/server.service';
 import {Server} from '../../model/server';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-server-list',
@@ -14,7 +15,8 @@ export class ServerListComponent implements OnInit {
     displayedColumns: string[] = ['id', 'name', 'ip', 'os', 'os-version'];
 
     constructor(
-        private serverService: ServerService
+        private serverService: ServerService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -25,6 +27,10 @@ export class ServerListComponent implements OnInit {
         this.serverService.getServers()
             .subscribe(servers => this.servers = servers);
 
+    }
+
+    navigateTo(row: any) {
+        this.router.navigate(['/server-detail/' + row.id]);
     }
 
 }

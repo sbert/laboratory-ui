@@ -29,11 +29,11 @@ export class ServerService {
             );
     }
 
-    getHero(id: number): Observable<Hero> {
-        const url = `${this.heroesUrl}/${id}`;
-        return this.http.get<Hero>(url).pipe(
-            tap(_ => this.log(`fetched hero id=${id}`)),
-            catchError(this.handleError<Hero>(`getHero id=${id}`))
+    getServer(id: number): Observable<Server> {
+        const url = `${this.serversUrl}/${id}`;
+        return this.http.get<Server>(url).pipe(
+            tap(_ => this.log(`fetched server id=${id}`)),
+            catchError(this.handleError<Server>(`getServer id=${id}`))
         );
     }
 
