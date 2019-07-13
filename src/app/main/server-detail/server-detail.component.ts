@@ -3,6 +3,7 @@ import { Server } from '../../model/server';
 import { ActivatedRoute } from '@angular/router';
 import { ServerService } from '../../service/server.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
+import { MiddlewareInstance } from '../../model/middleware';
 
 @Component({
     selector: 'app-server-detail',
@@ -11,6 +12,9 @@ import { FuseNavigationService } from '../../../@fuse/components/navigation/navi
 })
 export class ServerDetailComponent implements OnInit {
     @Input() server: Server;
+    @Input() middlewareInstances: MiddlewareInstance[];
+
+    MWdisplayedColumns: string[] = ['name', 'editor', 'version'];
 
     constructor(
         private route: ActivatedRoute,
@@ -20,6 +24,7 @@ export class ServerDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.getServer();
+        this.getMiddlewares();
     }
 
     getServer(): void {
@@ -30,6 +35,16 @@ export class ServerDetailComponent implements OnInit {
                 this.addCurrentNavItem();
             });
     }
+
+    getMiddlewares(): void {
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.serverService.getMiddlewares(id)
+            .subscribe(middlewareInstances => {
+                this.middlewareInstances = middlewareInstances;
+            });
+    }
+
+
 
     addCurrentNavItem(): void {
         // Prepare the new nav item

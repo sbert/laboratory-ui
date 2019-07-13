@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {Server} from '../model/server';
 import {catchError, tap} from 'rxjs/operators';
 import {MessageService} from './message.service';
+import { MiddlewareInstance } from '../model/middleware';
 
 
 const httpOptions = {
@@ -26,6 +27,15 @@ export class ServerService {
             .pipe(
                 tap(_ => this.log('fetched servers')),
                 catchError(this.handleError<Server[]>('getServers', []))
+            );
+    }
+
+    getMiddlewares(id: number): Observable<MiddlewareInstance[]> {
+        const url = `${this.serversUrl}/${id}/middlewares`;
+        return this.http.get<MiddlewareInstance[]>(url)
+            .pipe(
+                tap(_ => this.log('fetched middleware instance')),
+                catchError(this.handleError<MiddlewareInstance[]>('getMiddlewares', []))
             );
     }
 

@@ -2,17 +2,11 @@
     <!-- CONTENT -->
     <div class="content">
 
-        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="row"
-                     fxFlex="100">
-
-            <div class="fuse-widget-front">
-
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="row" fxFlex="100" >
+            <div class="fuse-widget-front mat-elevation-z8" >
                 <div class="px-16 border-bottom" fxLayout="row wrap" fxLayoutAlign="space-between center">
-
                     <div fxFlex class="py-16 h1">Server</div>
-
                 </div>
-
                 <div class="pt-8 pb-32" fxLayout="column">
                     <table>
                         <tr>
@@ -39,8 +33,35 @@
                     </table>
                 </div>
             </div>
+        </fuse-widget>
 
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="row" fxFlex="100">
+            <div class="fuse-widget-front mat-elevation-z8">
 
+                <div class="px-16 mb-8 border-bottom" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div fxFlex class="py-16 h1">Middlewares</div>
+                </div>
+                <table mat-table [dataSource]="middlewareInstances">
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.middlewareVersion.middleware.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="editor">
+                        <th mat-header-cell *matHeaderCellDef> Editor </th>
+                        <td mat-cell *matCellDef="let element"> {{element.middlewareVersion.editor}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="version">
+                        <th mat-header-cell *matHeaderCellDef> Version </th>
+                        <td mat-cell *matCellDef="let element"> {{element.middlewareVersion.number}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="MWdisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: MWdisplayedColumns;"></tr>
+                </table>
+            </div>
         </fuse-widget>
 
     </div>
