@@ -1,3 +1,48 @@
-<p>
-  server-detail works!
-</p>
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+    <!-- CONTENT -->
+    <div class="content">
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="row"
+                     fxFlex="100">
+
+            <div class="fuse-widget-front">
+
+                <div class="px-16 border-bottom" fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                    <div fxFlex class="py-16 h1">Server</div>
+
+                </div>
+
+                <div class="pt-8 pb-32" fxLayout="column">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{server.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>IP</th>
+                            <td>{{server.ip}}</td>
+                        </tr>
+                        <tr>
+                            <th>OS</th>
+                            <td>{{server.osVersion.os.name}} - {{server.osVersion.number}}</td>
+                        </tr>
+                        <tr>
+                            <th>RAM</th>
+                            <td>{{server.ram}}</td>
+                        </tr>
+                        <tr>
+                            <th>CPU</th>
+                            <td>{{server.cpu}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+
+        </fuse-widget>
+
+    </div>
+
+</div>

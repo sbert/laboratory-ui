@@ -11,7 +11,7 @@ import 'hammerjs';
 
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
+import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule, FuseWidgetModule } from '@fuse/components';
 
 import { fuseConfig } from 'app/fuse-config';
 
@@ -19,7 +19,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { ServerListComponent } from './main/server-list/server-list.component';
-import { MatTableModule } from '@angular/material';
+import { MatCardModule, MatListModule, MatTableModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { ServerDetailComponent } from './main/server-detail/server-detail.component';
 
@@ -36,7 +36,7 @@ const appRoutes: Routes = [
         ServerListComponent,
         ServerDetailComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -51,6 +51,7 @@ const appRoutes: Routes = [
         MatButtonModule,
         MatIconModule,
         MatTableModule,
+        MatCardModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
@@ -61,7 +62,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+        FuseWidgetModule,
+        MatListModule
     ],
     bootstrap   : [
         AppComponent

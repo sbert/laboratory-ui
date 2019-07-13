@@ -6,5 +6,7 @@ export class Server {
     name: string;
     ip: string;
     osVersion: OSVersion;
+    ram: number;
+    cpu: number;
 
 }
