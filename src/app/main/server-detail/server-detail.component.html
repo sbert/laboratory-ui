@@ -63,11 +63,11 @@
 
                         <ng-container matColumnDef="end-of-support">
                             <th mat-header-cell *matHeaderCellDef> End Of Support </th>
-                            <td mat-cell *matCellDef="let element"  [ngClass]=" { 'warn-800-fg': isObsolete(element.middlewareVersion.endOfSupport) }"> {{element.middlewareVersion.endOfSupport | date}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.middlewareVersion.endOfSupport | date}} </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="MWdisplayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: MWdisplayedColumns;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: MWdisplayedColumns;" [ngClass]="isObsoleteCss(row.middlewareVersion.endOfSupport)"></tr>
                     </table>
                 </div>
             </fuse-widget>

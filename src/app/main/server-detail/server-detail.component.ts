@@ -70,18 +70,18 @@ export class ServerDetailComponent implements OnInit {
             });
     }
 
-
-    isObsolete(date: Date): boolean {
-        console.log(date);
-        console.log(new Date());
-        console.log((new Date(date)).getTime() < Date.now());
-        // const test = new MiddlewareVersion();
-        // test.endOfSupport = new Date('2012-01-01');
-        // console.log(test.endOfSupport.getTime() < Date.now());
-        return (new Date(date)).getTime() < Date.now();
+    isObsoleteCss(date: Date): string {
+        if (date.getTime() <= Date.now()) {
+            return 'obsolete';
+        } else {
+            const nowPlusOneYear: Date = new Date(Date.now());
+            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
+            console.log(nowPlusOneYear)
+            if (date <= nowPlusOneYear) {
+                return 'obsolete1y';
+            }
+        }
     }
-
-
 
     addCurrentNavItem(): void {
         // Prepare the new nav item
