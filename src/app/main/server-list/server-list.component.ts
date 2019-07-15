@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ServerService} from '../../service/server.service';
 import {Server} from '../../model/server';
 import { Router } from '@angular/router';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-server-list',
@@ -10,13 +11,16 @@ import { Router } from '@angular/router';
 })
 export class ServerListComponent implements OnInit {
 
-    servers: Server[];
-
     displayedColumns: string[] = ['id', 'name', 'ip', 'os', 'os-version'];
+
+    dataSource: MatTableDataSource<Server>;
+
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
 
     constructor(
         private serverService: ServerService,
-        private router: Router
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -25,12 +29,24 @@ export class ServerListComponent implements OnInit {
 
     getServers(): void {
         this.serverService.getServers()
-            .subscribe(servers => this.servers = servers);
+            .subscribe(servers => {
+                this.dataSource = new MatTableDataSource(servers);
 
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            });
     }
 
     navigateTo(row: any) {
         this.router.navigate(['/server-detail/' + row.id]);
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
     }
 
 }

@@ -22,7 +22,7 @@ export class ServerDetailComponent implements OnInit {
 
     MWdisplayedColumns: string[] = ['name', 'editor', 'version', 'end-of-support'];
     ArtifactdisplayedColumns: string[] = ['artifact-id', 'version', 'environment'];
-    DatastoredisplayedColumns: string[] = ['type', 'name', 'version'];
+    DatastoredisplayedColumns: string[] = ['type', 'name', 'version', 'end-of-support'];
 
     constructor(
         private route: ActivatedRoute,
@@ -58,7 +58,7 @@ export class ServerDetailComponent implements OnInit {
         const id = +this.route.snapshot.paramMap.get('id');
         this.serverService.getDatastores(id)
             .subscribe(datastoreInstances => {
-                this.datastoreInstances = datastoreInstances;
+                this.datastoreInstances = datastoreInstances.map(data => new DatastoreInstance(data));
             });
     }
 
