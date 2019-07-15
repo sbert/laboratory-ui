@@ -278,7 +278,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
      */
     private _setupPosition(): void
     {
-        // Add the correct class name to the sidebar
+        // Add the correct class type to the sidebar
         // element depending on the position attribute
         if ( this.position === 'right' )
         {

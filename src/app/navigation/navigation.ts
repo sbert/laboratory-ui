@@ -8,26 +8,32 @@ export const navigation: FuseNavigation[] = [
         type     : 'group',
         children : [
             {
-                id       : 'sample',
-                title    : 'Sample',
-                translate: 'NAV.SAMPLE.TITLE',
-                type     : 'item',
-                icon     : 'email',
-                url      : '/sample',
-                badge    : {
-                    title    : '25',
-                    translate: 'NAV.SAMPLE.BADGE',
-                    bg       : '#F44336',
-                    fg       : '#FFFFFF'
-                }
-            },
-            {
                 id       : 'server-list',
-                title    : 'Server List',
-                translate: 'NAV.SERVER.LIST.TITLE',
+                title    : 'Serveurs',
                 type     : 'item',
                 icon     : 'computer',
                 url      : '/server-list'
+            },
+            {
+                id       : 'datastore-list',
+                title    : 'Datastores',
+                type     : 'item',
+                icon     : 'storage',
+                url      : '/datastore-list'
+            },
+            {
+                id       : 'middleware-list',
+                title    : 'Middlewares',
+                type     : 'item',
+                icon     : 'settings_ethernet',
+                url      : '/middleware-list'
+            },
+            {
+                id       : 'artifact-list',
+                title    : 'Applications',
+                type     : 'item',
+                icon     : 'apps',
+                url      : '/artifact-list'
             }
         ]
     }

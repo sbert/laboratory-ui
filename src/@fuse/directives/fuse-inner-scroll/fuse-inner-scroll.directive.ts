@@ -92,7 +92,7 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Add the class name
+     * Add the class type
      *
      * @private
      */
@@ -103,7 +103,7 @@ export class FuseInnerScrollDirective implements OnInit, OnDestroy
     }
 
     /**
-     * Remove the class name
+     * Remove the class type
      * @private
      */
     private _removeClass(): void

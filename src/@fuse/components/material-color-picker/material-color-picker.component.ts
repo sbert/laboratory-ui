@@ -82,7 +82,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor
         // Remove the last part
         colorParts.pop();
 
-        // Rejoin the remaining parts as the selected palette name
+        // Rejoin the remaining parts as the selected palette type
         this.selectedPalette = colorParts.join('-');
 
         // Store the color value

@@ -41,13 +41,13 @@ export class NavbarComponent
     @Input()
     set variant(value: string)
     {
-        // Remove the old class name
+        // Remove the old class type
         this._renderer.removeClass(this._elementRef.nativeElement, this.variant);
 
         // Store the variant value
         this._variant = value;
 
-        // Add the new class name
+        // Add the new class type
         this._renderer.addClass(this._elementRef.nativeElement, value);
     }
 }
