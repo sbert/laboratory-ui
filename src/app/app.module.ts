@@ -19,9 +19,10 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { ServerListComponent } from './main/server-list/server-list.component';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatListModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatBadgeModule, MatCardModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatListModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { ServerDetailComponent } from './main/server-detail/server-detail.component';
+import { DatastoreListComponent } from './main/datastore-list/datastore-list.component';
 
 const appRoutes: Routes = [
     {
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         ServerListComponent,
-        ServerDetailComponent
+        ServerDetailComponent,
+        DatastoreListComponent
     ],
     imports: [
         BrowserModule,
@@ -68,7 +70,9 @@ const appRoutes: Routes = [
         MatPaginatorModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSortModule
+        MatSortModule,
+        MatBadgeModule,
+        MatGridListModule
     ],
     bootstrap   : [
         AppComponent

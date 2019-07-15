@@ -1,9 +1,8 @@
-import { MiddlewareVersion } from './middleware';
-
 export class Datastore {
 
     type: string;
     name: string;
+    versions: DatastoreVersion[];
 
 }
 
@@ -12,6 +11,7 @@ export class DatastoreVersion {
     number: string;
     datastore: Datastore;
     endOfSupport: Date;
+    instances: DatastoreInstance;
 
     constructor(number: string, datastore: Datastore, endOfSupport: Date) {
         this.number = number;

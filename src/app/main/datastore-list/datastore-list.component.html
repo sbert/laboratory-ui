@@ -1,0 +1,46 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+
+    <h2>DATASTORES</h2>
+
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container matColumnDef="type">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.type | titlecase}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="version">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Versions </mat-header-cell>
+                <mat-cell *matCellDef="let element"  class="version-list">
+                    <mat-list dense>
+                        <mat-list-item *ngFor="let version of element.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
+                            <span style="width: 80px">{{ version.number }}</span>
+                            <span *ngIf="version.instances.length == 1">{{ version.instances.length }} instance</span>
+                            <span *ngIf="version.instances.length > 1">{{ version.instances.length }} instances</span>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-header-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateTo(row)" class="row-link"></mat-header-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    </div>
+
+</div>
