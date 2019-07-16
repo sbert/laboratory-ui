@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServerDetailComponent } from './main/server-detail/server-detail.component';
 import { DatastoreListComponent } from './main/datastore-list/datastore-list.component';
 import { DatastoreDetailComponent } from './main/datastore-detail/datastore-detail.component';
+import { MiddlewareListComponent } from './main/middleware-list/middleware-list.component';
 
 const appRoutes: Routes = [
     {
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
         ServerListComponent,
         ServerDetailComponent,
         DatastoreListComponent,
-        DatastoreDetailComponent
+        DatastoreDetailComponent,
+        MiddlewareListComponent
     ],
     imports: [
         BrowserModule,

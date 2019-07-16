@@ -1,0 +1,30 @@
+mat-table {
+    width: 100%;
+}
+
+.row-link:hover {
+    background-color: rgba(0, 0, 0, .10);
+    cursor: pointer;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.version-list mat-list {
+    padding-top: 0px;
+}
+
+.version-list span {
+    font-size: 14px;
+
+}
+
+.obsolete span {
+    color: #c62828!important;
+}
+
+.obsolete1y span {
+    color: #f57c00!important;
+}
