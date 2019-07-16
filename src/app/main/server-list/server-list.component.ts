@@ -11,7 +11,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 })
 export class ServerListComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'name', 'ip', 'os', 'os-version'];
+    displayedColumns: string[] = ['id', 'name', 'ip', 'os', 'os-version', 'ram', 'cpu'];
 
     dataSource: MatTableDataSource<Server>;
 
@@ -46,6 +46,19 @@ export class ServerListComponent implements OnInit {
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
+        }
+    }
+
+    isObsoleteCss(date: Date): string {
+        const dateAsDate = new Date(date);
+        if (dateAsDate.getTime() <= Date.now()) {
+            return 'obsolete';
+        } else {
+            const nowPlusOneYear: Date = new Date(Date.now());
+            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
+            if (dateAsDate <= nowPlusOneYear) {
+                return 'obsolete1y';
+            }
         }
     }
 

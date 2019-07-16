@@ -19,13 +19,20 @@
                                 <th>IP</th>
                                 <td>{{server.ip}}</td>
                             </tr>
-                            <tr>
-                                <th>OS</th>
-                                <td>{{server.osVersion.os.name}} - {{server.osVersion.number}}</td>
+                            <tr id='os-tr' [ngClass]="isObsoleteCss(server.osVersion.endOfSupport)">
+                                <th  rowspan="2"><span>OS</span></th>
+                                <td id="os">
+                                    <span>{{server.osVersion.os.name}} - {{server.osVersion.number}}</span>
+                                </td>
+                            </tr>
+                            <tr id='os-eos-tr' [ngClass]="isObsoleteCss(server.osVersion.endOfSupport)">
+                                <td style="font-size: 12px;">
+                                    <span>End Of Support : {{server.osVersion.endOfSupport}}</span>
+                                </td>
                             </tr>
                             <tr>
                                 <th>RAM</th>
-                                <td>{{server.ram}}</td>
+                                <td>{{server.ram}} <span>MO</span></td>
                             </tr>
                             <tr>
                                 <th>CPU</th>

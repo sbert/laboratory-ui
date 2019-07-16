@@ -23,7 +23,64 @@
         <!-- / HEADER -->
 
         <!-- CONTENT -->
-        <div class="content">
+        <div class="content page-layout blank p-24" fusePerfectScrollbar>
+
+            <div *ngFor="let version of datastore.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
+                <dl>
+                    <dt class="h2">Version {{ version.number }}</dt>
+                    <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
+                </dl>
+                <div class="mat-elevation-z8">
+                    <mat-table [dataSource]="version.instances">
+
+                        <!--- Note that these columns can be defined in any order.
+                              The actual rendered columns are set as a property on the row definition" -->
+
+                        <ng-container matColumnDef="server-name">
+                            <mat-header-cell *matHeaderCellDef> Server Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.server.name }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="server-ip">
+                            <mat-header-cell *matHeaderCellDef> Server IP </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.server.ip }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="artifacts">
+                            <mat-header-cell *matHeaderCellDef> Artifacts </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="bullet-list">
+                                    <ul dense>
+                                        <li *ngFor="let artifactInstance of element.artifactInstances">
+                                            <span>{{ artifactInstance.artifactVersion.artifact.artifactId }} - </span>
+                                            <span>{{ artifactInstance.artifactVersion.number }} - </span>
+                                            <span>{{ artifactInstance.environmentType }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="noData">
+                            <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+                                No Instances found.
+                            </mat-footer-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="loading">
+                            <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+                                Loading, please wait...
+                            </mat-footer-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-footer-row *matFooterRowDef="['noData']" [hidden]="version.instances && version.instances.length > 0"></mat-footer-row>
+                        <mat-footer-row *matFooterRowDef="['loading']" [hidden]="version.instances !== undefined"></mat-footer-row>
+                    </mat-table>
+
+                </div>
+            </div>
 
         </div>
         <!-- / CONTENT -->

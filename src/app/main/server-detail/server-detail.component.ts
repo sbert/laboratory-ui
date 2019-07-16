@@ -71,13 +71,14 @@ export class ServerDetailComponent implements OnInit {
     }
 
     isObsoleteCss(date: Date): string {
-        if (date.getTime() <= Date.now()) {
+        const dateAsDate = new Date(date);
+        if (dateAsDate.getTime() <= Date.now()) {
             return 'obsolete';
         } else {
             const nowPlusOneYear: Date = new Date(Date.now());
             nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
             console.log(nowPlusOneYear)
-            if (date <= nowPlusOneYear) {
+            if (dateAsDate <= nowPlusOneYear) {
                 return 'obsolete1y';
             }
         }

@@ -15,6 +15,7 @@ import { Datastore } from '../../model/datastore';
 export class DatastoreDetailComponent implements OnInit {
 
     datastore: Datastore;
+    displayedColumns: string[] = ['server-name', 'server-ip', 'artifacts'];
 
     constructor(
         private route: ActivatedRoute,
@@ -33,6 +34,20 @@ export class DatastoreDetailComponent implements OnInit {
                 this.datastore = datastore;
                 this.addCurrentNavItem();
             });
+    }
+
+    isObsoleteCss(date: Date): string {
+        const dateAsDate = new Date(date);
+        if (dateAsDate.getTime() <= Date.now()) {
+            return 'obsolete';
+        } else {
+            const nowPlusOneYear: Date = new Date(Date.now());
+            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
+            console.log(nowPlusOneYear)
+            if (dateAsDate <= nowPlusOneYear) {
+                return 'obsolete1y';
+            }
+        }
     }
 
     addCurrentNavItem(): void {
