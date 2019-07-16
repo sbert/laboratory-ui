@@ -1,4 +1,4 @@
-<div id="datastore-detail" class="page-layout blank" fusePerfectScrollbar>
+<div id="middleware-list" class="page-layout blank" fusePerfectScrollbar>
     <!-- CENTER -->
     <div class="center" fusePerfectScrollbar>
         <!-- HEADER -->
@@ -26,7 +26,7 @@
         <!-- CONTENT -->
         <div class="content page-layout blank p-24" fusePerfectScrollbar>
 
-            <mat-form-field>
+            <mat-form-field id="filter">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
 
@@ -75,6 +75,7 @@
                                 <mat-list-item *ngFor="let version of element.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
                                     <span>{{ version.endOfSupport }}</span>
                                 </mat-list-item>
+                                <mat-divider></mat-divider>
                             </mat-list>
                         </mat-cell>
                     </ng-container>

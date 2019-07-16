@@ -1,45 +1,73 @@
-<div class="page-layout blank p-24" fusePerfectScrollbar>
+<div id="datastore-list" class="page-layout blank" fusePerfectScrollbar>
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+        <!-- HEADER -->
+        <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
-    <h2>DATASTORES</h2>
+            <div fxLayout="row" fxLayoutAlign="start center">
 
-    <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+                <div class="logo mat-display-1 my-0 my-sm-24 welcome-message" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" [inline]="true">
+                        storage
+                    </mat-icon>
+                    <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        DATASTORES
+                     </span>
+                </div>
 
-    <div class="mat-elevation-z8">
-        <mat-table [dataSource]="dataSource" matSort>
+                <!--                <span class="mat-display-1 my-0 my-sm-24 welcome-message" [@animate]="{value:'*',params:{x:'50px'}}">-->
+                <!--                    {{ datastore.name }}-->
+                <!--                </span>-->
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
+            </div>
+        </div>
+        <!-- / HEADER -->
 
-            <ng-container matColumnDef="type">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.type | titlecase}} </mat-cell>
-            </ng-container>
+        <!-- CONTENT -->
+        <div class="content page-layout blank p-24" fusePerfectScrollbar>
 
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-            </ng-container>
+            <mat-form-field id="filter">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
 
-            <ng-container matColumnDef="version">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Versions </mat-header-cell>
-                <mat-cell *matCellDef="let element"  class="version-list">
-                    <mat-list dense>
-                        <mat-list-item *ngFor="let version of element.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
-                            <span style="width: 80px">{{ version.number }}</span>
-                            <span *ngIf="version.instances.length == 1">{{ version.instances.length }} instance</span>
-                            <span *ngIf="version.instances.length > 1">{{ version.instances.length }} instances</span>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-cell>
-            </ng-container>
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-header-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateTo(row)" class="row-link"></mat-header-row>
-        </mat-table>
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.type | titlecase}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="version">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Versions </mat-header-cell>
+                        <mat-cell *matCellDef="let element"  class="version-list">
+                            <mat-list dense>
+                                <mat-list-item *ngFor="let version of element.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
+                                    <span style="width: 80px">{{ version.number }}</span>
+                                    <span *ngIf="version.instances.length == 1">{{ version.instances.length }} instance</span>
+                                    <span *ngIf="version.instances.length > 1">{{ version.instances.length }} instances</span>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-header-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateTo(row)" class="row-link"></mat-header-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+            </div>
+
+        </div>
 
     </div>
 

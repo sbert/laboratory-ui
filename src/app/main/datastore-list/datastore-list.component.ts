@@ -3,11 +3,14 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { Datastore } from '../../model/datastore';
 import { DatastoreService } from '../../service/datastore.service';
+import { fuseAnimations } from '../../../@fuse/animations';
 
 @Component({
   selector: 'app-datastore-list',
   templateUrl: './datastore-list.component.html',
-  styleUrls: ['./datastore-list.component.scss']
+  styleUrls: ['./datastore-list.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations   : fuseAnimations
 })
 export class DatastoreListComponent implements OnInit {
 
