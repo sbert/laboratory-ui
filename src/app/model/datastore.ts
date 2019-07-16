@@ -1,5 +1,6 @@
 export class Datastore {
 
+    id: number;
     type: string;
     name: string;
     versions: DatastoreVersion[];

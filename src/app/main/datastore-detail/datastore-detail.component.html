@@ -1,0 +1,32 @@
+<div id="datastore-detail" class="page-layout blank" fusePerfectScrollbar>
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+        <!-- HEADER -->
+        <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <div class="logo mat-display-1 my-0 my-sm-24 welcome-message" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" [inline]="true">storage
+                    </mat-icon>
+                    <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        {{ datastore.type | titlecase }} - {{ datastore.name }}
+                     </span>
+                </div>
+
+                <!--                <span class="mat-display-1 my-0 my-sm-24 welcome-message" [@animate]="{value:'*',params:{x:'50px'}}">-->
+                <!--                    {{ datastore.name }}-->
+                <!--                </span>-->
+
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content">
+
+        </div>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -27,7 +27,7 @@ export class ServerDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private serverService: ServerService,
-        private fuseNavigationService: FuseNavigationService,
+        private fuseNavigationService: FuseNavigationService
     ) {}
 
     ngOnInit(): void {

@@ -23,6 +23,7 @@ import { MatBadgeModule, MatCardModule, MatFormFieldModule, MatGridListModule, M
 import { AppRoutingModule } from './app-routing.module';
 import { ServerDetailComponent } from './main/server-detail/server-detail.component';
 import { DatastoreListComponent } from './main/datastore-list/datastore-list.component';
+import { DatastoreDetailComponent } from './main/datastore-detail/datastore-detail.component';
 
 const appRoutes: Routes = [
     {
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
         AppComponent,
         ServerListComponent,
         ServerDetailComponent,
-        DatastoreListComponent
+        DatastoreListComponent,
+        DatastoreDetailComponent
     ],
     imports: [
         BrowserModule,

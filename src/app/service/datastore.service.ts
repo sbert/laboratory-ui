@@ -4,6 +4,7 @@ import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Datastore } from '../model/datastore';
+import { Server } from '../model/server';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,14 @@ export class DatastoreService {
                 tap(_ => this.log('fetched datastores')),
                 catchError(this.handleError<Datastore[]>('getDatastores', []))
             );
+    }
+
+    getDatastore(id: number): Observable<Datastore> {
+        const url = `${this.datastoresUrl}/${id}`;
+        return this.http.get<Datastore>(url).pipe(
+            tap(_ => this.log(`fetched datastore id=${id}`)),
+            catchError(this.handleError<Datastore>(`getDatastore id=${id}`))
+        );
     }
 
 
