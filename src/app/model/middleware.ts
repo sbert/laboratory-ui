@@ -1,7 +1,9 @@
 import { ArtifactInstance } from './artifact';
+import { Server } from './server';
 
 export class Middleware {
 
+    id: number;
     type: string;
     name: string;
     versions: MiddlewareVersion[];
@@ -28,6 +30,7 @@ export class MiddlewareInstance {
 
     middlewareVersion: MiddlewareVersion;
     artifactInstances: ArtifactInstance[];
+    server: Server;
 
     constructor(data: MiddlewareInstance) {
         this.middlewareVersion = new MiddlewareVersion(

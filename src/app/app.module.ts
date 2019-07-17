@@ -19,12 +19,14 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { ServerListComponent } from './main/server-list/server-list.component';
-import { MatBadgeModule, MatCardModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatListModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatBadgeModule, MatCardModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatListModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTabsModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { ServerDetailComponent } from './main/server-detail/server-detail.component';
 import { DatastoreListComponent } from './main/datastore-list/datastore-list.component';
 import { DatastoreDetailComponent } from './main/datastore-detail/datastore-detail.component';
 import { MiddlewareListComponent } from './main/middleware-list/middleware-list.component';
+import { MiddlewareDetailComponent } from './main/middleware-detail/middleware-detail.component';
+import { MiddlewareVersionApplicationComponent } from './main/middleware-detail/middleware-version-application/middleware-version-application.component';
 
 const appRoutes: Routes = [
     {
@@ -40,7 +42,9 @@ const appRoutes: Routes = [
         ServerDetailComponent,
         DatastoreListComponent,
         DatastoreDetailComponent,
-        MiddlewareListComponent
+        MiddlewareListComponent,
+        MiddlewareDetailComponent,
+        MiddlewareVersionApplicationComponent
     ],
     imports: [
         BrowserModule,
@@ -76,7 +80,8 @@ const appRoutes: Routes = [
         MatInputModule,
         MatSortModule,
         MatBadgeModule,
-        MatGridListModule
+        MatGridListModule,
+        MatTabsModule
     ],
     bootstrap   : [
         AppComponent

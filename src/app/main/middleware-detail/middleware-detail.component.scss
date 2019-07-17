@@ -1,0 +1,46 @@
+#middleware-detail{
+
+    > .center {
+
+        > .header {
+        }
+
+        > .content {
+            flex: 1;
+
+            mat-tab-group {
+                height: 100%;
+
+                .mat-tab-body-wrapper {
+                    flex-grow: 1;
+                }
+            }
+
+            .mat-tab-label-container {
+                padding: 0 24px;
+            }
+        }
+    }
+}
+
+.bullet-list ul {
+    padding-left: 17px;
+    margin: 0px;
+    font-size: 12px;
+}
+
+mat-table {
+    width: 100%;
+}
+
+.mb {
+    margin-bottom: 18px;
+}
+
+.obsolete dl {
+    color: #c62828!important;
+}
+
+.obsolete1y dl {
+    color: #f57c00!important;
+}

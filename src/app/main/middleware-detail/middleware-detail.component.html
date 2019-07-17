@@ -1,0 +1,94 @@
+<div id="middleware-list" class="page-layout blank" fusePerfectScrollbar>
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+        <!-- HEADER -->
+        <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <div class="logo mat-display-1 my-0 my-sm-24 welcome-message" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" [inline]="true">
+                        settings_ethernet
+                    </mat-icon>
+                    <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        Middleware - {{ middleware.name }}
+                     </span>
+                </div>
+
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content page-layout blank p-24" fusePerfectScrollbar>
+
+            <mat-tab-group dynamicHeight>
+
+                <mat-tab label="Applications">
+                    <div class="p-12" fxLayout="column wrap" fxFlex="100">
+
+                        <div *ngFor="let version of middleware.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
+                            <dl>
+                                <dt class="h2">Version {{ version.number }} - {{ version.editor }}</dt>
+                                <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
+                            </dl>
+
+                            <app-middleware-version-application [artifacts]="getArtifactInstances(version)"></app-middleware-version-application>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Servers">
+                    <div class="p-12" fxLayout="column wrap" fxFlex="100">
+
+                        <div *ngFor="let version of middleware.versions" [ngClass]="isObsoleteCss(version.endOfSupport)" >
+                            <dl>
+                                <dt class="h2">Version {{ version.number }} - {{ version.editor }}</dt>
+                                <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
+                            </dl>
+                            <div class="mat-elevation-z8 mb">
+                                <!--                            <mat-table [dataSource]="version.instances">-->
+
+                                <!--                                &lt;!&ndash;- Note that these columns can be defined in any order.-->
+                                <!--                                      The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
+
+                                <!--                                <ng-container matColumnDef="server-name">-->
+                                <!--                                    <mat-header-cell *matHeaderCellDef> Server Name </mat-header-cell>-->
+                                <!--                                    <mat-cell *matCellDef="let element"> {{ element.server.name }} </mat-cell>-->
+                                <!--                                </ng-container>-->
+
+                                <!--                                <ng-container matColumnDef="server-ip">-->
+                                <!--                                    <mat-header-cell *matHeaderCellDef> Server IP </mat-header-cell>-->
+                                <!--                                    <mat-cell *matCellDef="let element"> {{ element.server.ip }} </mat-cell>-->
+                                <!--                                </ng-container>-->
+
+                                <!--                                <ng-container matColumnDef="noData">-->
+                                <!--                                    <mat-footer-cell *matFooterCellDef [attr.colspan]="serverDisplayedColumns.length">-->
+                                <!--                                        No Instances found.-->
+                                <!--                                    </mat-footer-cell>-->
+                                <!--                                </ng-container>-->
+
+                                <!--                                <ng-container matColumnDef="loading">-->
+                                <!--                                    <mat-footer-cell *matFooterCellDef [attr.colspan]="serverDisplayedColumns.length">-->
+                                <!--                                        Loading, please wait...-->
+                                <!--                                    </mat-footer-cell>-->
+                                <!--                                </ng-container>-->
+
+                                <!--                                <mat-header-row *matHeaderRowDef="serverDisplayedColumns"></mat-header-row>-->
+                                <!--                                <mat-row *matRowDef="let row; columns: serverDisplayedColumns;"></mat-row>-->
+                                <!--                                <mat-footer-row *matFooterRowDef="['noData']" [hidden]="version.instances && version.instances.length > 0"></mat-footer-row>-->
+                                <!--                                <mat-footer-row *matFooterRowDef="['loading']" [hidden]="version.instances !== undefined"></mat-footer-row>-->
+                                <!--                            </mat-table>-->
+
+                                <!--                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>
+<!-- / CONTENT -->
