@@ -19,22 +19,22 @@
             <mat-cell *matCellDef="let element"> {{ element.environmentType }} </mat-cell>
         </ng-container>
 
-<!--        <ng-container matColumnDef="noData">-->
-<!--            <mat-footer-cell *matFooterCellDef [attr.colspan]="applicationDisplayedColumns.length">-->
-<!--                No Instances found.-->
-<!--            </mat-footer-cell>-->
-<!--        </ng-container>-->
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef [attr.colspan]="applicationDisplayedColumns.length">
+                No Instances found.
+            </mat-footer-cell>
+        </ng-container>
 
-<!--        <ng-container matColumnDef="loading">-->
-<!--            <mat-footer-cell *matFooterCellDef [attr.colspan]="applicationDisplayedColumns.length">-->
-<!--                Loading, please wait...-->
-<!--            </mat-footer-cell>-->
-<!--        </ng-container>-->
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef [attr.colspan]="applicationDisplayedColumns.length">
+                Loading, please wait...
+            </mat-footer-cell>
+        </ng-container>
 
         <mat-header-row *matHeaderRowDef="applicationDisplayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: applicationDisplayedColumns;"></mat-row>
-<!--        <mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource && dataSource > 0"></mat-footer-row>-->
-<!--        <mat-footer-row *matFooterRowDef="['loading']" [hidden]="dataSource !== undefined"></mat-footer-row>-->
+        <mat-footer-row *matFooterRowDef="['noData']" [hidden]="artifacts.length && artifacts.length > 0"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [hidden]="artifacts !== undefined"></mat-footer-row>
     </mat-table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

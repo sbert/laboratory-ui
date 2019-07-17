@@ -17,13 +17,7 @@ encapsulation: ViewEncapsulation.None,
 export class MiddlewareDetailComponent implements OnInit {
 
     middleware: Middleware;
-
-    serverDisplayedColumns: string[] = ['server-name', 'server-ip'];
-    applicationDisplayedColumns: string[] = ['server-name'];
-
-    dataSource: MatTableDataSource<MiddlewareVersion>;
-
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    filterVersions: MiddlewareVersion[];
 
     constructor(
         private route: ActivatedRoute,
@@ -40,8 +34,7 @@ export class MiddlewareDetailComponent implements OnInit {
         this.middlewareService.getMiddleware(id)
             .subscribe(middleware => {
                 this.middleware = middleware;
-                this.dataSource = new MatTableDataSource(middleware.versions);
-                this.dataSource.paginator = this.paginator;
+                this.filterVersions = middleware.versions;
                 this.addCurrentNavItem();
             });
     }
