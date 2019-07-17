@@ -4,20 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { MiddlewareService } from '../../service/middleware.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { fuseAnimations } from '../../../@fuse/animations';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ArtifactInstance } from '../../model/artifact';
+import { MiddlewareVersionApplicationComponent } from './middleware-version-application/middleware-version-application.component';
 
 @Component({
     selector: 'app-middleware-detail',
     templateUrl: './middleware-detail.component.html',
     styleUrls: ['./middleware-detail.component.scss'],
-encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
 export class MiddlewareDetailComponent implements OnInit {
 
     middleware: Middleware;
-    filterVersions: MiddlewareVersion[];
+    notifyObjs: Notifier[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -34,7 +34,9 @@ export class MiddlewareDetailComponent implements OnInit {
         this.middlewareService.getMiddleware(id)
             .subscribe(middleware => {
                 this.middleware = middleware;
-                this.filterVersions = middleware.versions;
+                this.middleware.versions.forEach( value => {
+                    this.notifyObjs[value.id] = new Notifier();
+                });
                 this.addCurrentNavItem();
             });
     }
@@ -46,6 +48,12 @@ export class MiddlewareDetailComponent implements OnInit {
             }
         );
         return artifacts;
+    }
+
+    applyFilter(filterValue: string): void {
+        this.middleware.versions.forEach( value => {
+            this.notifyObjs[value.id].valueChanged(filterValue);
+        });
     }
 
     isObsoleteCss(date: Date): string {
@@ -84,4 +92,8 @@ export class MiddlewareDetailComponent implements OnInit {
         this.fuseNavigationService.addNavigationItem(newNavItem, 'start');
     }
 
+}
+
+export class Notifier {
+    valueChanged: (data: string) => void = (d: string) => { };
 }

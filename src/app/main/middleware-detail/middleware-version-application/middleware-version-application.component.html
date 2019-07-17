@@ -19,6 +19,11 @@
             <mat-cell *matCellDef="let element"> {{ element.environmentType }} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="search">
+            <mat-header-cell *matHeaderCellDef> Search </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.search }} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="noData">
             <mat-footer-cell *matFooterCellDef [attr.colspan]="applicationDisplayedColumns.length">
                 No Instances found.

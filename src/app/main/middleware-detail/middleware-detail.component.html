@@ -22,6 +22,10 @@
         <!-- CONTENT -->
         <div class="content page-layout blank p-24" fusePerfectScrollbar>
 
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+
             <mat-tab-group dynamicHeight>
 
                 <mat-tab label="Applications">
@@ -33,7 +37,7 @@
                                 <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
                             </dl>
 
-                            <app-middleware-version-application [artifacts]="getArtifactInstances(version)"></app-middleware-version-application>
+                            <app-middleware-version-application id="amwa-{{ version.id }}" [artifacts]="getArtifactInstances(version)" [notify]="notifyObjs[version.id]"></app-middleware-version-application>
                         </div>
                     </div>
                 </mat-tab>

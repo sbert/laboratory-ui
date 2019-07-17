@@ -12,13 +12,14 @@ export class Middleware {
 
 export class MiddlewareVersion {
 
+    id: number;
     number: string;
     editor: string;
     middleware: Middleware;
     endOfSupport: Date;
     instances: MiddlewareInstance[];
 
-    constructor(number: string, editor: string, middleware: Middleware, endOfSupport: Date) {
+    constructor(id: number, number: string, editor: string, middleware: Middleware, endOfSupport: Date) {
         this.number = number;
         this.editor = editor;
         this.middleware = middleware;
@@ -34,6 +35,7 @@ export class MiddlewareInstance {
 
     constructor(data: MiddlewareInstance) {
         this.middlewareVersion = new MiddlewareVersion(
+            data.middlewareVersion.id,
             data.middlewareVersion.number,
             data.middlewareVersion.editor,
             data.middlewareVersion.middleware,

@@ -1,14 +1,13 @@
 export class Artifact {
 
-    code: string;
-    name: string;
+    artifactId: string;
+    groupId: string;
 
 }
 
 export class ArtifactVersion {
 
     number: string;
-    editor: string;
     artifact: Artifact;
 
 }
@@ -17,5 +16,7 @@ export class ArtifactInstance {
 
     artifactVersion: ArtifactVersion;
     environmentType: string;
+
+    search: string;
 
 }
