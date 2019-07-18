@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MiddlewareInstance, MiddlewareVersion } from '../../../model/middleware';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ArtifactInstance } from '../../../model/artifact';
-import { Notifier } from '../middleware-detail.component';
+import { Notifier } from '../../../model/notifier';
 
 @Component({
   selector: 'app-middleware-version-application',

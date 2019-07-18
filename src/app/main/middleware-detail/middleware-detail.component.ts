@@ -5,8 +5,8 @@ import { MiddlewareService } from '../../service/middleware.service';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { fuseAnimations } from '../../../@fuse/animations';
 import { ArtifactInstance } from '../../model/artifact';
-import { MiddlewareVersionApplicationComponent } from './middleware-version-application/middleware-version-application.component';
 import { Server } from '../../model/server';
+import { Notifier } from '../../model/notifier';
 
 @Component({
     selector: 'app-middleware-detail',
@@ -107,6 +107,3 @@ export class MiddlewareDetailComponent implements OnInit {
 
 }
 
-export class Notifier {
-    valueChanged: (data: string) => void = (d: string) => { };
-}

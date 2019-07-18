@@ -28,6 +28,7 @@ import { MiddlewareListComponent } from './main/middleware-list/middleware-list.
 import { MiddlewareDetailComponent } from './main/middleware-detail/middleware-detail.component';
 import { MiddlewareVersionApplicationComponent } from './main/middleware-detail/middleware-version-application/middleware-version-application.component';
 import { MiddlewareVersionServerComponent } from './main/middleware-detail/middleware-version-server/middleware-version-server.component';
+import { ServerListTableComponent } from './main/server-list/server-list-table/server-list-table.component';
 
 const appRoutes: Routes = [
     {
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
         MiddlewareListComponent,
         MiddlewareDetailComponent,
         MiddlewareVersionApplicationComponent,
-        MiddlewareVersionServerComponent
+        MiddlewareVersionServerComponent,
+        ServerListTableComponent
     ],
     imports: [
         BrowserModule,

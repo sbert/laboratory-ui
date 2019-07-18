@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {ServerService} from '../../service/server.service';
 import {Server} from '../../model/server';
 import { Router } from '@angular/router';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '../../../@fuse/animations';
+import { Notifier } from '../../model/notifier';
 
 @Component({
   selector: 'app-server-list',
@@ -14,55 +14,27 @@ import { fuseAnimations } from '../../../@fuse/animations';
 })
 export class ServerListComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'name', 'ip', 'os', 'os-version', 'ram', 'cpu'];
-
-    dataSource: MatTableDataSource<Server>;
-
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
+    servers: Server[];
+    notifyObj: Notifier = new Notifier();
 
     constructor(
         private serverService: ServerService,
-        private router: Router,
+        private router: Router
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getServers();
     }
 
     getServers(): void {
         this.serverService.getServers()
             .subscribe(servers => {
-                this.dataSource = new MatTableDataSource(servers);
-
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
+                this.servers = servers;
             });
     }
 
-    navigateTo(row: any) {
-        this.router.navigate(['/server-detail/' + row.id]);
-    }
-
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
-    }
-
-    isObsoleteCss(date: Date): string {
-        const dateAsDate = new Date(date);
-        if (dateAsDate.getTime() <= Date.now()) {
-            return 'obsolete';
-        } else {
-            const nowPlusOneYear: Date = new Date(Date.now());
-            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
-            if (dateAsDate <= nowPlusOneYear) {
-                return 'obsolete1y';
-            }
-        }
+    applyFilter(filterValue: string): void {
+        this.notifyObj.valueChanged(filterValue);
     }
 
 }

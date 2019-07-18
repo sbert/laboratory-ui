@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Server } from '../../../model/server';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { MiddlewareVersion } from '../../../model/middleware';
-import { Notifier } from '../middleware-detail.component';
+import { Notifier } from '../../../model/notifier';
+import { ServerListTableComponent } from '../../server-list/server-list-table/server-list-table.component';
 
 @Component({
   selector: 'app-middleware-version-server',
@@ -14,18 +15,14 @@ export class MiddlewareVersionServerComponent implements OnInit {
     @Input() servers: Server[];
     dataSource: MatTableDataSource<Server>;
     @Input() version: MiddlewareVersion;
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     @Input() notify = new Notifier();
-
-    applicationDisplayedColumns: string[] = ['name', 'ip', 'os', 'os-version'];
+    notify2 = new Notifier();
 
     constructor() { }
 
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource(this.servers);
-        this.dataSource.paginator = this.paginator;
         this.notify.valueChanged = (d: string) => {
-            console.log(`Parent has notified changes to ${d}`);
             this.applyFilter(d);
         };
         this.servers.forEach( it => {
@@ -35,10 +32,7 @@ export class MiddlewareVersionServerComponent implements OnInit {
 
     applyFilter(filterValue: string): void {
         this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
+        this.notify2.valueChanged(filterValue);
     }
 
 }
