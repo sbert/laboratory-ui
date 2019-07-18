@@ -27,6 +27,7 @@ import { DatastoreDetailComponent } from './main/datastore-detail/datastore-deta
 import { MiddlewareListComponent } from './main/middleware-list/middleware-list.component';
 import { MiddlewareDetailComponent } from './main/middleware-detail/middleware-detail.component';
 import { MiddlewareVersionApplicationComponent } from './main/middleware-detail/middleware-version-application/middleware-version-application.component';
+import { MiddlewareVersionServerComponent } from './main/middleware-detail/middleware-version-server/middleware-version-server.component';
 
 const appRoutes: Routes = [
     {
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
         DatastoreDetailComponent,
         MiddlewareListComponent,
         MiddlewareDetailComponent,
-        MiddlewareVersionApplicationComponent
+        MiddlewareVersionApplicationComponent,
+        MiddlewareVersionServerComponent
     ],
     imports: [
         BrowserModule,

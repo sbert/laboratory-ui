@@ -1,4 +1,4 @@
-<div id="middleware-list" class="page-layout blank" fusePerfectScrollbar>
+<div id="middleware-detail" class="page-layout blank" fusePerfectScrollbar>
     <!-- CENTER -->
     <div class="center" fusePerfectScrollbar>
         <!-- HEADER -->
@@ -16,15 +16,27 @@
                 </div>
 
             </div>
+
+            <!-- SEARCH -->
+            <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+
+                <div class="search-wrapper mt-16 mt-sm-0">
+
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>search</mat-icon>
+                        <input (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- / SEARCH -->
+
         </div>
         <!-- / HEADER -->
 
         <!-- CONTENT -->
         <div class="content page-layout blank p-24" fusePerfectScrollbar>
-
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
 
             <mat-tab-group dynamicHeight>
 
@@ -32,61 +44,15 @@
                     <div class="p-12" fxLayout="column wrap" fxFlex="100">
 
                         <div *ngFor="let version of middleware.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
-                            <dl>
-                                <dt class="h2">Version {{ version.number }} - {{ version.editor }}</dt>
-                                <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
-                            </dl>
-
-                            <app-middleware-version-application id="amwa-{{ version.id }}" [artifacts]="getArtifactInstances(version)" [notify]="notifyObjs[version.id]"></app-middleware-version-application>
+                            <app-middleware-version-application id="amwa-{{ version.id }}" [version]="version" [artifacts]="getArtifactInstances(version)" [notify]="notifyObjs[version.id]"></app-middleware-version-application>
                         </div>
                     </div>
                 </mat-tab>
 
                 <mat-tab label="Servers">
                     <div class="p-12" fxLayout="column wrap" fxFlex="100">
-
-                        <div *ngFor="let version of middleware.versions" [ngClass]="isObsoleteCss(version.endOfSupport)" >
-                            <dl>
-                                <dt class="h2">Version {{ version.number }} - {{ version.editor }}</dt>
-                                <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
-                            </dl>
-                            <div class="mat-elevation-z8 mb">
-                                <!--                            <mat-table [dataSource]="version.instances">-->
-
-                                <!--                                &lt;!&ndash;- Note that these columns can be defined in any order.-->
-                                <!--                                      The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
-
-                                <!--                                <ng-container matColumnDef="server-name">-->
-                                <!--                                    <mat-header-cell *matHeaderCellDef> Server Name </mat-header-cell>-->
-                                <!--                                    <mat-cell *matCellDef="let element"> {{ element.server.name }} </mat-cell>-->
-                                <!--                                </ng-container>-->
-
-                                <!--                                <ng-container matColumnDef="server-ip">-->
-                                <!--                                    <mat-header-cell *matHeaderCellDef> Server IP </mat-header-cell>-->
-                                <!--                                    <mat-cell *matCellDef="let element"> {{ element.server.ip }} </mat-cell>-->
-                                <!--                                </ng-container>-->
-
-                                <!--                                <ng-container matColumnDef="noData">-->
-                                <!--                                    <mat-footer-cell *matFooterCellDef [attr.colspan]="serverDisplayedColumns.length">-->
-                                <!--                                        No Instances found.-->
-                                <!--                                    </mat-footer-cell>-->
-                                <!--                                </ng-container>-->
-
-                                <!--                                <ng-container matColumnDef="loading">-->
-                                <!--                                    <mat-footer-cell *matFooterCellDef [attr.colspan]="serverDisplayedColumns.length">-->
-                                <!--                                        Loading, please wait...-->
-                                <!--                                    </mat-footer-cell>-->
-                                <!--                                </ng-container>-->
-
-                                <!--                                <mat-header-row *matHeaderRowDef="serverDisplayedColumns"></mat-header-row>-->
-                                <!--                                <mat-row *matRowDef="let row; columns: serverDisplayedColumns;"></mat-row>-->
-                                <!--                                <mat-footer-row *matFooterRowDef="['noData']" [hidden]="version.instances && version.instances.length > 0"></mat-footer-row>-->
-                                <!--                                <mat-footer-row *matFooterRowDef="['loading']" [hidden]="version.instances !== undefined"></mat-footer-row>-->
-                                <!--                            </mat-table>-->
-
-                                <!--                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
-
-                            </div>
+                        <div *ngFor="let version of middleware.versions" [ngClass]="isObsoleteCss(version.endOfSupport)">
+                            <app-middleware-version-server id="amws-{{ version.id }}" [version]="version" [servers]="getArtifactServers(version)" [notify]="notifyObjsServer[version.id]"></app-middleware-version-server>
                         </div>
                     </div>
                 </mat-tab>

@@ -6,6 +6,7 @@ import { FuseNavigationService } from '../../../@fuse/components/navigation/navi
 import { fuseAnimations } from '../../../@fuse/animations';
 import { ArtifactInstance } from '../../model/artifact';
 import { MiddlewareVersionApplicationComponent } from './middleware-version-application/middleware-version-application.component';
+import { Server } from '../../model/server';
 
 @Component({
     selector: 'app-middleware-detail',
@@ -18,6 +19,7 @@ export class MiddlewareDetailComponent implements OnInit {
 
     middleware: Middleware;
     notifyObjs: Notifier[] = [];
+    notifyObjsServer: Notifier[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -36,6 +38,7 @@ export class MiddlewareDetailComponent implements OnInit {
                 this.middleware = middleware;
                 this.middleware.versions.forEach( value => {
                     this.notifyObjs[value.id] = new Notifier();
+                    this.notifyObjsServer[value.id] = new Notifier();
                 });
                 this.addCurrentNavItem();
             });
@@ -50,9 +53,19 @@ export class MiddlewareDetailComponent implements OnInit {
         return artifacts;
     }
 
+    getArtifactServers(version: MiddlewareVersion): Server[] {
+        const servers: Server[] = [];
+        version.instances.forEach( value => {
+                servers.push(value.server);
+            }
+        );
+        return servers;
+    }
+
     applyFilter(filterValue: string): void {
         this.middleware.versions.forEach( value => {
             this.notifyObjs[value.id].valueChanged(filterValue);
+            this.notifyObjsServer[value.id].valueChanged(filterValue);
         });
     }
 

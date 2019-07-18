@@ -1,35 +1,35 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MiddlewareInstance, MiddlewareVersion } from '../../../model/middleware';
+import { Server } from '../../../model/server';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { ArtifactInstance } from '../../../model/artifact';
+import { MiddlewareVersion } from '../../../model/middleware';
 import { Notifier } from '../middleware-detail.component';
 
 @Component({
-  selector: 'app-middleware-version-application',
-  templateUrl: './middleware-version-application.component.html',
-  styleUrls: ['./middleware-version-application.component.scss']
+  selector: 'app-middleware-version-server',
+  templateUrl: './middleware-version-server.component.html',
+  styleUrls: ['./middleware-version-server.component.scss']
 })
-export class MiddlewareVersionApplicationComponent implements OnInit {
+export class MiddlewareVersionServerComponent implements OnInit {
 
-    @Input() artifacts: ArtifactInstance[];
-    dataSource: MatTableDataSource<ArtifactInstance>;
+    @Input() servers: Server[];
+    dataSource: MatTableDataSource<Server>;
     @Input() version: MiddlewareVersion;
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     @Input() notify = new Notifier();
 
-    applicationDisplayedColumns: string[] = ['artifact-id', 'version', 'environment'];
+    applicationDisplayedColumns: string[] = ['name', 'ip', 'os', 'os-version'];
 
     constructor() { }
 
     ngOnInit(): void {
-        this.dataSource = new MatTableDataSource(this.artifacts);
+        this.dataSource = new MatTableDataSource(this.servers);
         this.dataSource.paginator = this.paginator;
         this.notify.valueChanged = (d: string) => {
             console.log(`Parent has notified changes to ${d}`);
             this.applyFilter(d);
         };
-        this.artifacts.forEach( it => {
-            it.search = it.environmentType + it.artifactVersion.number + it.artifactVersion.artifact.artifactId;
+        this.servers.forEach( it => {
+            it.search = it.ip + it.name + it.osVersion.number + it.osVersion.os.name;
         });
     }
 

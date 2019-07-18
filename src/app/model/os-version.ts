@@ -5,7 +5,7 @@ export class OSVersion {
     id: number;
     number: string;
     os: OperatingSystem;
-    endOfSupport: Date
+    endOfSupport: Date;
 
 
 }

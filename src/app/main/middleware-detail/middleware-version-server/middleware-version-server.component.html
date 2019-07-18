@@ -4,31 +4,30 @@
         <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
     </dl>
 
-
     <div class="mat-elevation-z8 mb">
         <mat-table [dataSource]="dataSource">
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
 
-            <ng-container matColumnDef="artifact-id">
-                <mat-header-cell *matHeaderCellDef> Application </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{ element.artifactVersion.artifact.artifactId }} </mat-cell>
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="version">
-                <mat-header-cell *matHeaderCellDef> Version </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{ element.artifactVersion.number }} </mat-cell>
+            <ng-container matColumnDef="ip">
+                <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.ip }} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="environment">
-                <mat-header-cell *matHeaderCellDef> Environment </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{ element.environmentType }} </mat-cell>
+            <ng-container matColumnDef="os">
+                <mat-header-cell *matHeaderCellDef> OS </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.osVersion.os.name }} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="search">
-                <mat-header-cell *matHeaderCellDef> Search </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{ element.search }} </mat-cell>
+            <ng-container matColumnDef="os-version">
+                <mat-header-cell *matHeaderCellDef> OS Version </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.osVersion.number }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="loading">
@@ -39,7 +38,7 @@
 
             <mat-header-row *matHeaderRowDef="applicationDisplayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: applicationDisplayedColumns;"></mat-row>
-            <mat-footer-row *matFooterRowDef="['loading']" [hidden]="artifacts !== undefined"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['loading']" [hidden]="servers !== undefined"></mat-footer-row>
         </mat-table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

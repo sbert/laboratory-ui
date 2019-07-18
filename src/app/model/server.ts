@@ -9,4 +9,6 @@ export class Server {
     ram: number;
     cpu: number;
 
+    search: string;
+
 }
