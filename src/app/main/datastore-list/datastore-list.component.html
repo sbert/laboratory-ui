@@ -15,20 +15,27 @@
                      </span>
                 </div>
 
-                <!--                <span class="mat-display-1 my-0 my-sm-24 welcome-message" [@animate]="{value:'*',params:{x:'50px'}}">-->
-                <!--                    {{ datastore.name }}-->
-                <!--                </span>-->
+            </div>
+
+            <!-- SEARCH -->
+            <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+
+                <div class="search-wrapper mt-16 mt-sm-0">
+
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>search</mat-icon>
+                        <input (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </div>
+
+                </div>
 
             </div>
+            <!-- / SEARCH -->
         </div>
         <!-- / HEADER -->
 
         <!-- CONTENT -->
         <div class="content page-layout blank p-24" fusePerfectScrollbar>
-
-            <mat-form-field id="filter">
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
 
             <div class="mat-elevation-z8">
                 <mat-table [dataSource]="dataSource" matSort>
