@@ -8,6 +8,8 @@ export class Middleware {
     name: string;
     versions: MiddlewareVersion[];
 
+    search: String;
+
 }
 
 export class MiddlewareVersion {
