@@ -29,6 +29,8 @@ import { MiddlewareDetailComponent } from './main/middleware-detail/middleware-d
 import { MiddlewareVersionApplicationComponent } from './main/middleware-detail/middleware-version-application/middleware-version-application.component';
 import { MiddlewareVersionServerComponent } from './main/middleware-detail/middleware-version-server/middleware-version-server.component';
 import { ServerListTableComponent } from './main/server-list/server-list-table/server-list-table.component';
+import { ArtifactListComponent } from './main/artifact-list/artifact-list.component';
+import { ArtifactListTableComponent } from './main/artifact-list/artifact-list-table/artifact-list-table.component';
 
 const appRoutes: Routes = [
     {
@@ -48,7 +50,9 @@ const appRoutes: Routes = [
         MiddlewareDetailComponent,
         MiddlewareVersionApplicationComponent,
         MiddlewareVersionServerComponent,
-        ServerListTableComponent
+        ServerListTableComponent,
+        ArtifactListComponent,
+        ArtifactListTableComponent
     ],
     imports: [
         BrowserModule,

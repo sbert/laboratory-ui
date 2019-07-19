@@ -6,9 +6,9 @@ import { Notifier } from '../../../model/notifier';
 import { ServerListTableComponent } from '../../server-list/server-list-table/server-list-table.component';
 
 @Component({
-  selector: 'app-middleware-version-server',
-  templateUrl: './middleware-version-server.component.html',
-  styleUrls: ['./middleware-version-server.component.scss']
+    selector: 'app-middleware-version-server',
+    templateUrl: './middleware-version-server.component.html',
+    styleUrls: ['./middleware-version-server.component.scss']
 })
 export class MiddlewareVersionServerComponent implements OnInit {
 

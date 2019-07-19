@@ -1,4 +1,3 @@
-<!--<div>-->
 <div *ngIf="dataSource.filteredData.length && dataSource.filteredData.length > 0">
     <dl>
         <dt class="h2">Version {{ version.number }} - {{ version.editor }}</dt>
@@ -6,46 +5,4 @@
     </dl>
 
     <app-server-list-table #serverListTable [servers]="servers" [notify]="notify2"></app-server-list-table>
-
-
-    <!--    <div class="mat-elevation-z8 mb">-->
-<!--        <mat-table [dataSource]="dataSource">-->
-
-<!--            &lt;!&ndash;- Note that these columns can be defined in any order.-->
-<!--                  The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
-
-<!--            <ng-container matColumnDef="name">-->
-<!--                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>-->
-<!--                <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="ip">-->
-<!--                <mat-header-cell *matHeaderCellDef> IP </mat-header-cell>-->
-<!--                <mat-cell *matCellDef="let element"> {{ element.ip }} </mat-cell>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="os">-->
-<!--                <mat-header-cell *matHeaderCellDef> OS </mat-header-cell>-->
-<!--                <mat-cell *matCellDef="let element"> {{ element.osVersion.os.name }} </mat-cell>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="os-version">-->
-<!--                <mat-header-cell *matHeaderCellDef> OS Version </mat-header-cell>-->
-<!--                <mat-cell *matCellDef="let element"> {{ element.osVersion.number }} </mat-cell>-->
-<!--            </ng-container>-->
-
-<!--            <ng-container matColumnDef="loading">-->
-<!--                <mat-footer-cell *matFooterCellDef [attr.colspan]="applicationDisplayedColumns.length">-->
-<!--                    Loading, please wait...-->
-<!--                </mat-footer-cell>-->
-<!--            </ng-container>-->
-
-<!--            <mat-header-row *matHeaderRowDef="applicationDisplayedColumns"></mat-header-row>-->
-<!--            <mat-row *matRowDef="let row; columns: applicationDisplayedColumns;"></mat-row>-->
-<!--            <mat-footer-row *matFooterRowDef="['loading']" [hidden]="servers !== undefined"></mat-footer-row>-->
-<!--        </mat-table>-->
-
-<!--        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
-
-<!--    </div>-->
 </div>

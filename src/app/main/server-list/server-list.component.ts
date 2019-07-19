@@ -6,9 +6,9 @@ import { fuseAnimations } from '../../../@fuse/animations';
 import { Notifier } from '../../model/notifier';
 
 @Component({
-  selector: 'app-server-list',
-  templateUrl: './server-list.component.html',
-  styleUrls: ['./server-list.component.scss'],
+    selector: 'app-server-list',
+    templateUrl: './server-list.component.html',
+    styleUrls: ['./server-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })

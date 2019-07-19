@@ -6,13 +6,13 @@ import { isObsoleteCss } from '../../../shared/util-css';
 import { Notifier } from '../../../model/notifier';
 
 @Component({
-  selector: 'app-server-list-table',
-  templateUrl: './server-list-table.component.html',
-  styleUrls: ['./server-list-table.component.scss']
+    selector: 'app-server-list-table',
+    templateUrl: './server-list-table.component.html',
+    styleUrls: ['./server-list-table.component.scss']
 })
 export class ServerListTableComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'name', 'ip', 'os', 'os-version', 'ram', 'cpu'];
+    displayedColumns: string[] = ['name', 'ip', 'os', 'os-version', 'ram', 'cpu'];
 
     dataSource: MatTableDataSource<Server>;
     @Input() servers: Server[];
