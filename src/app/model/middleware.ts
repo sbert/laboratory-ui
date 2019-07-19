@@ -8,7 +8,7 @@ export class Middleware {
     name: string;
     versions: MiddlewareVersion[];
 
-    search: String;
+    search: string;
 
 }
 
@@ -20,6 +20,8 @@ export class MiddlewareVersion {
     middleware: Middleware;
     endOfSupport: Date;
     instances: MiddlewareInstance[];
+
+    search: string;
 
     constructor(id: number, number: string, editor: string, middleware: Middleware, endOfSupport: Date) {
         this.number = number;

@@ -4,6 +4,7 @@ import { Middleware, MiddlewareVersion } from '../../model/middleware';
 import { MiddlewareService } from '../../service/middleware.service';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '../../../@fuse/animations';
+import { isObsoleteCss } from '../../shared/util-css';
 
 @Component({
     selector: 'app-middleware-list',
@@ -16,15 +17,18 @@ export class MiddlewareListComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'version', 'editor', 'end-of-support', 'nb-server', 'nb-artifact'];
 
-    dataSource: MatTableDataSource<Middleware>;
+    dataSource: MatTableDataSource<MiddlewareVersion>;
+    versions: MiddlewareVersion[] = [];
+
+    spans = [];
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
 
     constructor(
         private middlewareService: MiddlewareService,
         private router: Router,
-    ) { }
+    ) {
+    }
 
     ngOnInit(): void {
         this.getMiddlewares();
@@ -33,11 +37,58 @@ export class MiddlewareListComponent implements OnInit {
     getMiddlewares(): void {
         this.middlewareService.getMiddlewares()
             .subscribe(middlewares => {
-                this.dataSource = new MatTableDataSource(middlewares);
+                middlewares.forEach(it => {
+                    it.versions.forEach( version => {
+                        version.middleware = new Middleware();
+                        version.middleware.name = it.name;
+                        version.middleware.id = it.id;
+                    });
+                    this.versions = this.versions.concat(it.versions);
+                });
+                this.versions.forEach(it => {
+                    it.search = it.middleware.name + it.editor + it.number + it.endOfSupport;
+                });
+                this.dataSource = new MatTableDataSource(this.versions);
+
+                this.cacheSpan('name', d => d.middleware.name);
 
                 this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
             });
+    }
+
+    /**
+     * Evaluated and store an evaluation of the rowspan for each row.
+     * The key determines the column it affects, and the accessor determines the
+     * value that should be checked for spanning.
+     */
+    cacheSpan(key, accessor): void {
+        for (let i = 0; i < this.dataSource.filteredData.length;) {
+            const currentValue = accessor(this.dataSource.filteredData[i]);
+            let count = 1;
+
+            // Iterate through the remaining rows to see how many match
+            // the current value as retrieved through the accessor.
+            for (let j = i + 1; j < this.dataSource.filteredData.length; j++) {
+                if (currentValue !== accessor(this.dataSource.filteredData[j])) {
+                    break;
+                }
+
+                count++;
+            }
+
+            if (!this.spans[i]) {
+                this.spans[i] = {};
+            }
+
+            // Store the number of similar values that were found (the span)
+            // and skip i to the next unique row.
+            this.spans[i][key] = count;
+            i += count;
+        }
+    }
+
+    getRowSpan(col, index): boolean {
+        return this.spans[index] && this.spans[index][col];
     }
 
     countArtifactsByVersion(version: MiddlewareVersion): number {
@@ -47,11 +98,13 @@ export class MiddlewareListComponent implements OnInit {
     }
 
     navigateTo(row: any): void {
-        this.router.navigate(['/middleware-detail/' + row.id]);
+        this.router.navigate(['/middleware-detail/' + row.middleware.id]);
     }
 
     applyFilter(filterValue: string): void {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        this.cacheSpan('name', d => d.middleware.name);
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
@@ -59,17 +112,7 @@ export class MiddlewareListComponent implements OnInit {
     }
 
     isObsoleteCss(date: Date): string {
-        const dateAsDate = new Date(date);
-        if (dateAsDate.getTime() <= Date.now()) {
-            return 'obsolete';
-        } else {
-            const nowPlusOneYear: Date = new Date(Date.now());
-            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
-            console.log(nowPlusOneYear);
-            if (dateAsDate <= nowPlusOneYear) {
-                return 'obsolete1y';
-            }
-        }
+        return isObsoleteCss(date);
     }
 
 }
