@@ -31,6 +31,9 @@ import { MiddlewareVersionServerComponent } from './main/middleware-detail/middl
 import { ServerListTableComponent } from './main/server-list/server-list-table/server-list-table.component';
 import { ArtifactListComponent } from './main/artifact-list/artifact-list.component';
 import { ArtifactListTableComponent } from './main/artifact-list/artifact-list-table/artifact-list-table.component';
+import { DatastoreVersionApplicationComponent } from './main/datastore-detail/datastore-version-application/datastore-version-application.component';
+import { DatastoreVersionServerComponent } from './main/datastore-detail/datastore-version-server/datastore-version-server.component';
+import { ArtifactDetailComponent } from './main/artifact-detail/artifact-detail.component';
 
 const appRoutes: Routes = [
     {
@@ -52,7 +55,10 @@ const appRoutes: Routes = [
         MiddlewareVersionServerComponent,
         ServerListTableComponent,
         ArtifactListComponent,
-        ArtifactListTableComponent
+        ArtifactListTableComponent,
+        DatastoreVersionApplicationComponent,
+        DatastoreVersionServerComponent,
+        ArtifactDetailComponent
     ],
     imports: [
         BrowserModule,

@@ -103,7 +103,7 @@ export class MiddlewareListComponent implements OnInit {
 
     applyFilter(filterValue: string): void {
         this.dataSource.filter = filterValue.trim().toLowerCase();
-        console.log('value ' + filterValue)
+        this.spans = [];
         this.cacheSpan('name', d => d.middleware.name);
 
         if (this.dataSource.paginator) {

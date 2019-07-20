@@ -36,7 +36,7 @@ export class ArtifactListTableComponent implements OnInit {
     }
 
     navigateTo(row: any): void {
-        this.router.navigate(['/artifact-detail/' + row.id]);
+        this.router.navigate(['/artifact-detail/' + row.artifactVersion.artifact.id]);
     }
 
     isObsoleteCss(date: Date): string {

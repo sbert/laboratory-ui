@@ -7,6 +7,7 @@ import { MiddlewareInstance, MiddlewareVersion } from '../../model/middleware';
 import { ArtifactInstance } from '../../model/artifact';
 import { fuseAnimations } from '../../../@fuse/animations';
 import { Datastore, DatastoreInstance } from '../../model/datastore';
+import { isObsoleteCss } from '../../shared/util-css';
 
 @Component({
     selector: 'app-server-detail',
@@ -71,17 +72,7 @@ export class ServerDetailComponent implements OnInit {
     }
 
     isObsoleteCss(date: Date): string {
-        const dateAsDate = new Date(date);
-        if (dateAsDate.getTime() <= Date.now()) {
-            return 'obsolete';
-        } else {
-            const nowPlusOneYear: Date = new Date(Date.now());
-            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
-            console.log(nowPlusOneYear)
-            if (dateAsDate <= nowPlusOneYear) {
-                return 'obsolete1y';
-            }
-        }
+        return isObsoleteCss(date);
     }
 
     addCurrentNavItem(): void {

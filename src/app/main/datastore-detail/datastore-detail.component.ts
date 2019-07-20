@@ -3,7 +3,11 @@ import { fuseAnimations } from '../../../@fuse/animations';
 import { ActivatedRoute } from '@angular/router';
 import { FuseNavigationService } from '../../../@fuse/components/navigation/navigation.service';
 import { DatastoreService } from '../../service/datastore.service';
-import { Datastore } from '../../model/datastore';
+import { Datastore, DatastoreVersion } from '../../model/datastore';
+import { Notifier } from '../../model/notifier';
+import { ArtifactInstance } from '../../model/artifact';
+import { Server } from '../../model/server';
+import { isObsoleteCss } from '../../shared/util-css';
 
 @Component({
     selector: 'app-datastore-detail',
@@ -15,7 +19,8 @@ import { Datastore } from '../../model/datastore';
 export class DatastoreDetailComponent implements OnInit {
 
     datastore: Datastore;
-    displayedColumns: string[] = ['server-name', 'server-ip', 'artifacts'];
+    notifyObjs: Notifier[] = [];
+    notifyObjsServer: Notifier[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -32,22 +37,41 @@ export class DatastoreDetailComponent implements OnInit {
         this.datastoreService.getDatastore(id)
             .subscribe(datastore => {
                 this.datastore = datastore;
+                this.datastore.versions.forEach( value => {
+                    this.notifyObjs[value.id] = new Notifier();
+                    this.notifyObjsServer[value.id] = new Notifier();
+                });
                 this.addCurrentNavItem();
             });
     }
 
-    isObsoleteCss(date: Date): string {
-        const dateAsDate = new Date(date);
-        if (dateAsDate.getTime() <= Date.now()) {
-            return 'obsolete';
-        } else {
-            const nowPlusOneYear: Date = new Date(Date.now());
-            nowPlusOneYear.setFullYear(nowPlusOneYear.getFullYear() + 1);
-            console.log(nowPlusOneYear)
-            if (dateAsDate <= nowPlusOneYear) {
-                return 'obsolete1y';
+    getArtifactInstances(version: DatastoreVersion): ArtifactInstance[] {
+        let artifacts: ArtifactInstance[] = [];
+        version.instances.forEach( value => {
+                artifacts = artifacts.concat(value.artifactInstances);
             }
-        }
+        );
+        return artifacts;
+    }
+
+    getArtifactServers(version: DatastoreVersion): Server[] {
+        const servers: Server[] = [];
+        version.instances.forEach( value => {
+                servers.push(value.server);
+            }
+        );
+        return servers;
+    }
+
+    applyFilter(filterValue: string): void {
+        this.datastore.versions.forEach( value => {
+            this.notifyObjs[value.id].valueChanged(filterValue);
+            this.notifyObjsServer[value.id].valueChanged(filterValue);
+        });
+    }
+
+    isObsoleteCss(date: Date): string {
+        return isObsoleteCss(date);
     }
 
     addCurrentNavItem(): void {

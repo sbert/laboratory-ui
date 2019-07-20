@@ -1,8 +1,8 @@
 <div *ngIf="dataSource.filteredData.length && dataSource.filteredData.length > 0">
     <dl>
-        <dt class="h2">Version {{ version.number }} - {{ version.editor }}</dt>
+        <dt class="h2">Version {{ version.number }} </dt>
         <dd>End Of Support: {{ version.endOfSupport | date }}</dd>
     </dl>
 
-    <app-server-list-table [servers]="servers" [notify]="notify2"></app-server-list-table>
+    <app-artifact-list-table [artifacts]="artifacts" [notify]="notify3"></app-artifact-list-table>
 </div>

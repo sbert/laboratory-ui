@@ -1,3 +1,45 @@
-<p>
-  artifact-list works!
-</p>
+<div id="artifact-list" class="page-layout blank" fusePerfectScrollbar>
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+        <!-- HEADER -->
+        <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <div class="logo mat-display-1 my-0 my-sm-24 welcome-message" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" [inline]="true">
+                        apps
+                    </mat-icon>
+                    <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        APPLICATIONS
+                     </span>
+                </div>
+
+            </div>
+
+            <!-- SEARCH -->
+            <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+
+                <div class="search-wrapper mt-16 mt-sm-0">
+
+                    <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>search</mat-icon>
+                        <input (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content page-layout blank p-24" fusePerfectScrollbar>
+
+            <app-artifact-list-table [artifacts]="artifacts" *ngIf="artifacts" [notify]="notifyObj"></app-artifact-list-table>
+
+        </div>
+
+    </div>
+</div>

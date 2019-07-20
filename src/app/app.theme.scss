@@ -83,6 +83,9 @@ $typography: mat-typography-config(
 @import "src/app/main/middleware-list/middleware-list.theme";
 @import "src/app/main/middleware-detail/middleware-detail.theme";
 @import "src/app/main/datastore-list/datastore-list.theme";
+@import "src/app/main/datastore-detail/datastore-detail.theme";
+@import "src/app/main/artifact-list/artifact-list.theme";
+@import "src/app/main/artifact-detail/artifact-detail.theme";
 
 // Define a mixin for easier access
 @mixin components-theme($theme) {
@@ -95,6 +98,9 @@ $typography: mat-typography-config(
     @include middleware-list-theme($theme);
     @include middleware-detail-theme($theme);
     @include datastore-list-theme($theme);
+    @include datastore-detail-theme($theme);
+    @include artifact-list-theme($theme);
+    @include artifact-detail-theme($theme);
 
 }
 

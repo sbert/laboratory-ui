@@ -19,6 +19,11 @@
             <td mat-cell *matCellDef="let element"><span>  {{ element.environmentType }} </span></td>
         </ng-container>
 
+        <ng-container matColumnDef="search">
+            <th mat-header-cell *matHeaderCellDef> Search </th>
+            <td mat-cell *matCellDef="let element"><span>  {{ element.search }} </span></td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateTo(row)" class="row-link"></tr>
     </table>
